@@ -1,4 +1,8 @@
 $(document).ready(function() {
-    $('header').load('../components/header.html');
-    $('footer').load('../components/footer.html');
+    $.get('../components/header.html', (data) => {
+        $('header').replaceWith(data);
+    });
+    $.get('../components/footer.html', (data) => {
+       $('footer').replaceWith(data);
+    });
 });
