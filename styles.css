@@ -1,3 +1,16 @@
 .navbar-brand img {
     max-width: 75px;
 }
+
+.listings div.card {
+    width: 18rem;
+}
+
+.listings div.card img {
+    object-fit: cover;
+    aspect-ratio: 4/3;
+}
+
+a {
+    text-decoration: none;
+}
