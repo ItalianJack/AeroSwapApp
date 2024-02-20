@@ -1,5 +1,4 @@
 const model = require('../models/aircraft');
-const upload = require('multer')({dest: './public/images'});
 
 // Index - GET /aircraft
 exports.index = (req, res) => {
