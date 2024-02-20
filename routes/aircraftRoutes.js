@@ -10,7 +10,7 @@ router.get('/', controller.index);
 router.get('/new', controller.new);
 
 // Create - POST /aircraft
-// router.post('/', controller.create);
+router.post('/', controller.create);
 
 // Show - GET /aircraft/:id
 router.get('/:id', controller.show);

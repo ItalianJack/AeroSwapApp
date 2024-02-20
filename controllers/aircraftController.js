@@ -11,6 +11,11 @@ exports.new = (req, res) => {
 }
 
 // Create - POST /aircraft
+exports.create = (req, res) => {
+    res.status = 200;
+    res.send(req.body);
+    console.log(req.body);
+}
 
 // Show - GET /aircraft/:id
 exports.show = (req, res, next) => {

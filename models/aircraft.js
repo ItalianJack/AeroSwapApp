@@ -97,6 +97,12 @@ exports.deleteById = (id) => {
     }
 }
 
+exports.create = (newAircraft) => {
+    newAircraft.id = uuidv4();
+    aircraft.push(newAircraft);
+    return newAircraft.id;
+}
+
 exports.getConditionString = (condition) =>
     condition === 'new' ? 'New' :
         condition === 'like-new' ? 'Like New' :
