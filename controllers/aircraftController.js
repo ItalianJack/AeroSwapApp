@@ -36,7 +36,9 @@ exports.edit = (req, res) => {
 // Update - PUT /aircraft/:id
 exports.update = (req, res) => {
     const updatedAircraft = req.body;
-    updatedAircraft.image = req.file.filename;
+    if (req.file) {
+        updatedAircraft.image = req.file.filename;
+    }
     const id = req.params.id;
     model.updateById(id, updatedAircraft);
     res.redirect(`/aircraft/${id}`);
