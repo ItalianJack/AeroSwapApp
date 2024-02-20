@@ -61,7 +61,7 @@ let aircraft = [
         title: 'Cirrus Vision',
         seller: 'Adam Jones',
         condition: 'used-no-overhaul',
-        price: 599999.99,
+        price: 59999.99,
         details: 'Very good condition Cirrus Vision SF-50, never been overhauled. Blue. Lycoming OH-972. 2007 model.',
         image: 'cirrus_vision_sf50_wikipedia_fullsize.jpg',
         totalOffers: 0,
@@ -69,6 +69,7 @@ let aircraft = [
     },
 ]
 
+// Search is performed here because once database is added it will be performed using database functions
 exports.find = (string) => {
     let result = aircraft.sort((a, b) => a.price - b.price);
     if (!string) {
