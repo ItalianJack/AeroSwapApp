@@ -1,7 +1,7 @@
 <%- include('../partials/header.ejs') %>
 <main class="d-flex min-vh-100 flex-column">
     <section class="mx-auto p-5">
-        <form action="/aircraft" method="POST" class="card p-2 bg-body-secondary">
+        <form action="/aircraft" method="POST" class="card p-2 bg-body-secondary" enctype="multipart/form-data">
             <h4>Create a new listing</h4>
             <fieldset class="mb-2">
                 <label for="used-condition" class="form-label">Condition:</label>
@@ -29,7 +29,7 @@
             </fieldset>
             <fieldset class="mb-2">
                 <label for="listing-image" class="form-label">Upload image:</label>
-                <input name="image" formenctype="multipart/form-data" type="file" id="listing-image" class="form-control" accept="image/jpeg, image/png" required>
+                <input name="image" type="file" id="image" class="form-control" accept="image/jpeg, image/png" required>
             </fieldset>
             <input type="submit" value="Submit" class="form-control">
         </form>

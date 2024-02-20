@@ -99,6 +99,8 @@ exports.deleteById = (id) => {
 
 exports.create = (newAircraft) => {
     newAircraft.id = uuidv4();
+    newAircraft.totalOffers = 0;
+    newAircraft.active = true;
     aircraft.push(newAircraft);
     return newAircraft.id;
 }

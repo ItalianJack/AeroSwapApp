@@ -1,4 +1,5 @@
 const model = require('../models/aircraft');
+const upload = require('multer')({dest: './public/images'});
 
 // Index - GET /aircraft
 exports.index = (req, res) => {
@@ -12,10 +13,13 @@ exports.new = (req, res) => {
 
 // Create - POST /aircraft
 exports.create = (req, res) => {
-    res.status = 200;
-    res.send(req.body);
-    console.log(req.body);
+    const newAircraft = req.body;
+    newAircraft.image = req.file.filename;
+    newAircraft.seller = 'Anonymous User'
+    const id = model.create(newAircraft);
+    res.redirect(`/aircraft/${id}`);
 }
+
 
 // Show - GET /aircraft/:id
 exports.show = (req, res, next) => {
@@ -32,6 +36,7 @@ exports.edit = (req, res) => {
 // Update - PUT /aircraft/:id
 exports.update = (req, res) => {
     const updatedAircraft = req.body;
+    updatedAircraft.image = req.file.filename;
     const id = req.params.id;
     model.updateById(id, updatedAircraft);
     res.redirect(`/aircraft/${id}`);

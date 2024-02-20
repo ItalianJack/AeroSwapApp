@@ -1,7 +1,7 @@
 <%- include('../partials/header.ejs') %>
 <main class="d-flex min-vh-100 flex-column">
     <section class="mx-auto p-5">
-        <form action="/aircraft/<%= aircraft.id %>?_method=PUT" method="POST" class="card p-2 bg-body-secondary">
+        <form action="/aircraft/<%= aircraft.id %>?_method=PUT" method="POST" enctype="multipart/form-data" class="card p-2 bg-body-secondary">
             <h4>Edit listing</h4>
             <fieldset class="mb-2">
                 <label for="used-condition" class="form-label">Condition:</label>

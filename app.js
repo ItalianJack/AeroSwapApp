@@ -1,5 +1,6 @@
 // require modules
 const express = require('express');
+const multer = require('multer');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const aircraftRoutes = require('./routes/aircraftRoutes');
