@@ -22,7 +22,7 @@ router.get('/:id/edit', controller.edit);
 router.put('/:id', controller.update);
 
 // Destroy - DELETE /aircraft/:id
-// router.delete('/:id', controller.destroy);
+router.delete('/:id', controller.destroy);
 
 
 module.exports = router;

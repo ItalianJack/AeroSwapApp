@@ -87,6 +87,16 @@ exports.updateById = (id, updatedAircraft) => {
     }
 }
 
+exports.deleteById = (id) => {
+    const index = aircraft.findIndex(aircraft => aircraft.id === id);
+    if (index !== -1) {
+        aircraft.splice(index, 1);
+        return true;
+    } else {
+        return false;
+    }
+}
+
 exports.getConditionString = (condition) =>
     condition === 'new' ? 'New' :
         condition === 'like-new' ? 'Like New' :

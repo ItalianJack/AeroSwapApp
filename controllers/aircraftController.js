@@ -33,3 +33,8 @@ exports.update = (req, res) => {
 }
 
 // Destroy - DELETE /aircraft/:id
+exports.destroy = (req, res) => {
+    const id = req.params.id;
+    model.deleteById(id);
+    res.redirect('/aircraft');
+}
