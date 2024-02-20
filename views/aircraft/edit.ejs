@@ -1,0 +1,55 @@
+<%- include('../partials/header.ejs') %>
+<main class="d-flex min-vh-100 flex-column">
+    <section class="mx-auto p-5">
+        <form action="/aircraft/<%= aircraft.id %>?_method=PUT" method="POST" class="card p-2 bg-body-secondary">
+            <h4>Edit listing</h4>
+            <fieldset class="mb-2">
+                <label for="used-condition" class="form-label">Condition:</label>
+                <select name="condition" id="used-condition" class="form-control" required>
+                    <option value="">Choose one...</option>
+                    <option value="new" <% if (aircraft.condition === 'new') { %>selected
+                            <% } %>
+                    >Brand new (&lt;100hr TTAF)
+                    </option>
+                    <option value="like-new" <% if (aircraft.condition === 'like-new') { %>selected
+                            <% } %>
+                    >Like new
+                    </option>
+                    <option value="used-no-overhaul" <% if (aircraft.condition === 'used-no-overhaul') { %>selected
+                            <% } %>
+                    >Used, no engine overhauls
+                    </option>
+                    <option value="1-overhaul" <% if (aircraft.condition === '1-overhaul') { %>selected
+                            <% } %>
+                    >Used, one engine overhaul
+                    </option>
+                    <option value="2-overhaul" <% if (aircraft.condition === '2-overhaul') { %>selected
+                            <% } %>
+                    >Used, two or more overhauls
+                    </option>
+                </select>
+            </fieldset>
+            <fieldset class="mb-2">
+                <label for="listing-name" class="form-label">Listing/aircraft name:</label>
+                <input name="title" type="text" id="listing-name" placeholder="ex: 1995 Cessna 172S 1100hr" class="form-control"
+                       maxlength="30" value="<%= aircraft.title %>" required>
+            </fieldset>
+            <fieldset class="mb-2">
+                <label for="listing-price" class="form-label">Price:</label>
+                <input name="price" type="number" id="listing-price" min="1000" class="form-control" value="<%= aircraft.price %>"
+                       step="0.01" required>
+            </fieldset>
+            <fieldset class="mb-2">
+                <label for="listing-details" class="form-label">Listing description:</label>
+                <textarea name="details" id="listing-details" cols="30" rows="5" class="form-control"
+                          required><%= aircraft.details %></textarea>
+            </fieldset>
+            <fieldset class="mb-2">
+                <label for="listing-image" class="form-label">Upload image:</label>
+                <input name="image" type="file" id="listing-image" class="form-control" accept="image/jpeg, image/png">
+            </fieldset>
+            <input type="submit" value="Submit" class="form-control">
+        </form>
+    </section>
+</main>
+<%- include('../partials/footer.ejs') %>
