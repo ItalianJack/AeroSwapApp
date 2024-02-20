@@ -69,7 +69,15 @@ let aircraft = [
     },
 ]
 
-exports.find = () => aircraft;
+exports.find = (string) => {
+    let result = aircraft.sort((a, b) => a.price - b.price);
+    if (!string) {
+        return result;
+    } else {
+        string = string.toLowerCase();
+        return result.filter((aircraft) => aircraft.title.toLowerCase().includes(string) || aircraft.details.toLowerCase().includes(string));
+    }
+}
 
 exports.findById = (id) => aircraft.find(aircraft => aircraft.id === id);
 
@@ -80,7 +88,9 @@ exports.updateById = (id, updatedAircraft) => {
         currentAircraft.condition = updatedAircraft.condition;
         currentAircraft.price = updatedAircraft.price;
         currentAircraft.details = updatedAircraft.details;
-        if (updatedAircraft.image) { currentAircraft.image = updatedAircraft.image; }
+        if (updatedAircraft.image) {
+            currentAircraft.image = updatedAircraft.image;
+        }
         return true;
     } else {
         return false;

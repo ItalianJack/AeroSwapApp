@@ -4,6 +4,11 @@
         <form action="/aircraft" method="POST" class="card p-2 bg-body-secondary" enctype="multipart/form-data">
             <h4>Create a new listing</h4>
             <fieldset class="mb-2">
+                <label for="seller" class="form-label">Your name:</label>
+                <input name="seller" type="text" id="seller" placeholder="John Doe" class="form-control"
+                       maxlength="30" required>
+            </fieldset>
+            <fieldset class="mb-2">
                 <label for="used-condition" class="form-label">Condition:</label>
                 <select name="condition" id="used-condition" class="form-control" required>
                     <option value="">Choose one...</option>
@@ -16,16 +21,19 @@
             </fieldset>
             <fieldset class="mb-2">
                 <label for="listing-name" class="form-label">Listing/aircraft name:</label>
-                <input name="title" type="text" id="listing-name" placeholder="ex: 1995 Cessna 172S 1100hr" class="form-control"
+                <input name="title" type="text" id="listing-name" placeholder="ex: 1995 Cessna 172S 1100hr"
+                       class="form-control"
                        maxlength="30" required>
             </fieldset>
             <fieldset class="mb-2">
                 <label for="listing-price" class="form-label">Price:</label>
-                <input name="price" type="number" id="listing-price" min="1000" class="form-control" step="0.01" required>
+                <input name="price" type="number" id="listing-price" min="1000" class="form-control" step="0.01"
+                       required>
             </fieldset>
             <fieldset class="mb-2">
                 <label for="listing-details" class="form-label">Listing description:</label>
-                <textarea name="details" id="listing-details" cols="30" rows="5" class="form-control" required></textarea>
+                <textarea name="details" id="listing-details" cols="30" rows="5" class="form-control"
+                          required></textarea>
             </fieldset>
             <fieldset class="mb-2">
                 <label for="listing-image" class="form-label">Upload image:</label>
