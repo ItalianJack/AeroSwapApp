@@ -2,6 +2,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
+const mongoose = require('mongoose');
 const aircraftRoutes = require('./routes/aircraftRoutes');
 
 // create app
@@ -46,6 +47,12 @@ app.use((err, req, res, next) => {
     res.render('error', {err});
 })
 
-app.listen(port, host, () => {
-    console.log(`Server running at ${host} on port ${port}`);
-})
+mongoose.connect('mongodb+srv://dbUser:dbUserPassword@project3.jnmet5s.mongodb.net/project3')
+    .then(() => {
+        app.listen(port, host, () => {
+            console.log(`Server running at ${host} on port ${port}`);
+        })
+    })
+    .catch(err => {
+        console.log(`Error connecting to DB: ${err}`);
+    });
