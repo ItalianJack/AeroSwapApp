@@ -38,15 +38,16 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     console.log('\n\n\n===== ERROR HANDLER =====');
     console.log(err);
-    printKeyValuePairs(err);
+    // printKeyValuePairs(err);
     // console.log(err.stack);
 
-    if (err.reason.toString().includes('BSONError')) {
+    if (err.message.toLowerCase().includes('validation')) {
+        err.status = 400;
+        // err.message is fine as is
+    } else if (err.reason && err.reason.toString().includes('BSONError')) {
         err.status = 400;
         err.message = 'Bad Request: Invalid ID';
-    }
-
-    if (!err.status) {
+    } else if (!err.status) {
         err.status = 500;
         err.message = 'Internal Server Error';
     }
@@ -56,6 +57,7 @@ app.use((err, req, res, next) => {
 })
 
 function printKeyValuePairs(err) {
+    console.log('KEY/VALUE PAIRS: ');
     Object.keys(err).forEach(key => {
         console.log(key + ': ' + err[key]);
     });
