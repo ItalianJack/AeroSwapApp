@@ -15,7 +15,7 @@ exports.new = (req, res) => {
 }
 
 // Create - POST /aircraft
-exports.create = (req, res) => {
+exports.create = (req, res, next) => {
     let newAircraft = new Aircraft(req.body);
     newAircraft.image = req.file.filename;
     newAircraft.save()
@@ -24,7 +24,7 @@ exports.create = (req, res) => {
             res.redirect(`/aircraft/${savedAircraft._id}`);
         })
         .catch(err => {
-            console.log('MONGOOSE ERROR: ' + err);
+            next(err);
         })
 }
 
@@ -35,10 +35,8 @@ exports.show = (req, res, next) => {
         .then((aircraft) => {
             res.render('aircraft/show', {aircraft});
         })
-        .catch((err) => {
-            printKeyValuePairs(err);
-            err = new Error(`No aircraft found with id ${id}`);
-            err.status = 404;
+        .catch(err => {
+            console.log('caught show');
             next(err);
         });
 }
@@ -50,10 +48,7 @@ exports.edit = (req, res, next) => {
         .then((aircraft) => {
             res.render('aircraft/edit', {aircraft});
         })
-        .catch((err) => {
-            console.log('MONGOOSE ERROR: ' + err);
-            err = new Error(`No aircraft found with id ${id}`);
-            err.status = 404;
+        .catch(err => {
             next(err);
         });
 }
@@ -69,10 +64,7 @@ exports.update = (req, res, next) => {
         .then(() => {
             res.redirect(`/aircraft/${id}`);
         })
-        .catch((err) => {
-            console.log('MONGOOSE ERROR: ' + err);
-            err = new Error(`No aircraft found with id ${id}`);
-            err.status = 404;
+        .catch(err => {
             next(err);
         });
 }
@@ -84,16 +76,7 @@ exports.destroy = (req, res, next) => {
         .then(() => {
             res.redirect('/aircraft');
         })
-        .catch((err) => {
-            console.log('MONGOOSE ERROR: ' + err);
-            err = new Error(`No aircraft found with id ${id}`);
-            err.status = 404;
+        .catch(err => {
             next(err);
         });
-}
-
-function printKeyValuePairs(err) {
-    Object.keys(err).forEach(key => {
-        console.log(key + ': ' + err[key]);
-    });
 }

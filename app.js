@@ -34,9 +34,17 @@ app.use((req, res, next) => {
     next(err);
 });
 
-// Error page
+// Error page/handling
 app.use((err, req, res, next) => {
-    console.log(err.stack);
+    console.log('\n\n\n===== ERROR HANDLER =====');
+    console.log(err);
+    printKeyValuePairs(err);
+    // console.log(err.stack);
+
+    if (err.reason.toString().includes('BSONError')) {
+        err.status = 400;
+        err.message = 'Bad Request: Invalid ID';
+    }
 
     if (!err.status) {
         err.status = 500;
@@ -46,6 +54,12 @@ app.use((err, req, res, next) => {
     res.status(err.status);
     res.render('error', {err});
 })
+
+function printKeyValuePairs(err) {
+    Object.keys(err).forEach(key => {
+        console.log(key + ': ' + err[key]);
+    });
+}
 
 mongoose.connect('mongodb+srv://dbUser:dbUserPassword@project3.jnmet5s.mongodb.net/project3')
     .then(() => {
