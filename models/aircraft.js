@@ -2,16 +2,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const aircraftSchema = new Schema({
-    title: {type: String, required: true},
-    seller: {type: String, required: true},
+    title: {type: String, required: [true, 'Title is required']},
+    seller: {type: String, required: [true, 'Seller is required']},
     condition: {
         type: String,
-        required: true,
-        enum: ['New', 'Like New', 'Used, no engine overhauls', 'Used, one engine overhaul', 'Used, two or more overhauls']
+        enum: {
+            values: ['New', 'Like new', 'Used, no engine overhauls', 'Used, one engine overhaul', 'Used, two or more overhauls'],
+            message: 'Condition must be an approved value'
+        },
+        required: true
     },
-    price: {type: Number, required: true},
-    details: {type: String, required: true},
-    image: {type: String, required: true},
+    price: {type: Number, required: [true, 'Price is required'], min: [0.01, 'Price must be greater than 0']},
+    details: {type: String, required: [true, 'Details are required']},
+    image: {type: String, required: [true, 'Image is required']},
     totalOffers: {type: Number, default: 0},
     active: {type: Boolean, default: true}
 });
