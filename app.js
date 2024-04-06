@@ -38,8 +38,6 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     console.log('\n\n\n===== ERROR HANDLER =====');
     console.log(err);
-    // printKeyValuePairs(err);
-    // console.log(err.stack);
 
     if (err.message.toLowerCase().includes('validation')) {
         err.status = 400;
@@ -63,7 +61,7 @@ function printKeyValuePairs(err) {
     });
 }
 
-mongoose.connect('mongodb+srv://dbUser:dbUserPassword@project3.jnmet5s.mongodb.net/project3')
+mongoose.connect('mongodb+srv://dbUser:dbUserPassword@project3.jnmet5s.mongodb.net/aeroswap')
     .then(() => {
         app.listen(port, host, () => {
             console.log(`Server running at ${host} on port ${port}`);
