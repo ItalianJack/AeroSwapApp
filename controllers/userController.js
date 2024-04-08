@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Aircraft = require('../models/aircraft');
 
 exports.new = (req, res) => {
     res.render('users/new');
@@ -53,6 +54,12 @@ exports.login = (req, res, next) => {
                     })
             }
         })
+}
+
+exports.profile = (req, res, next) => {
+    Aircraft.find({seller: req.session.user.id})
+        .then(aircraft => res.render('users/profile', {aircraft}))
+        .catch(err => next(err));
 }
 
 exports.logout = (req, res, next) => {

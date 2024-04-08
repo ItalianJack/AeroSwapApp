@@ -19,7 +19,7 @@ router.get('/login', controller.showLogin);
 router.post('/login', controller.login);
 
 // GET /users/profile: Render the user profile page
-// router.get('/profile', controller.profile);
+router.get('/profile', controller.profile);
 
 // GET /users/logout: Log out a user
 router.get('/logout', controller.logout);
