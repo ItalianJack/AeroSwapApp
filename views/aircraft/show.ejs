@@ -17,7 +17,7 @@
                 <li class="list-group-item">
                     <%= aircraft.details %>
                 </li>
-                <% if (user._id == aircraft.seller._id) { %>
+                <% if (user && user._id == aircraft.seller._id) { %>
                 <li class="list-group-item">
                     <form>
                         <button type="submit" formmethod="GET" formaction="/aircraft/<%= aircraft.id %>/edit" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit Listing</button>
