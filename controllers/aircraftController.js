@@ -34,7 +34,7 @@ exports.create = (req, res, next) => {
 // Show - GET /aircraft/:id
 exports.show = (req, res, next) => {
     const id = req.params.id
-    Aircraft.findById(id)
+    Aircraft.findById(id).populate('seller', 'firstName lastName')
         .then((aircraft) => {
             if (!aircraft) {
                 let err = new Error('No listing found with id ' + id);
