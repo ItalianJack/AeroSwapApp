@@ -18,6 +18,7 @@ exports.new = (req, res) => {
 // Create - POST /aircraft
 exports.create = (req, res, next) => {
     let newAircraft = new Aircraft(req.body);
+    newAircraft.seller = req.session.user._id;
     if (req.file) {
         newAircraft.image = req.file.filename;
     }
