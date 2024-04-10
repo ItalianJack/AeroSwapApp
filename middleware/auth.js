@@ -6,7 +6,7 @@ exports.isGuest = (req, res, next) => {
         next();
     } else {
         req.flash('error', 'You are already logged in.');
-        res.redirect('/users/login');
+        res.redirect('/users/profile');
     }
 }
 
@@ -29,6 +29,7 @@ exports.isSeller = (req, res, next) => {
                 } else {
                     let err = new Error('Unauthorized');
                     err.status = 401;
+                    next(err);
                 }
             } else {
                 const err = new Error('Listing not found');
