@@ -2,6 +2,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
+const mongoose = require('mongoose');
 const aircraftRoutes = require('./routes/aircraftRoutes');
 
 // create app
@@ -33,11 +34,18 @@ app.use((req, res, next) => {
     next(err);
 });
 
-// Error page
+// Error page/handling
 app.use((err, req, res, next) => {
-    console.log(err.stack);
+    console.log('\n\n\n===== ERROR HANDLER =====');
+    console.log(err);
 
-    if (!err.status) {
+    if (err.message.toLowerCase().includes('validation')) {
+        err.status = 400;
+        // err.message is fine as is
+    } else if (err.reason && err.reason.toString().includes('BSONError')) {
+        err.status = 400;
+        err.message = 'Bad Request: Invalid ID';
+    } else if (!err.status) {
         err.status = 500;
         err.message = 'Internal Server Error';
     }
@@ -46,6 +54,19 @@ app.use((err, req, res, next) => {
     res.render('error', {err});
 })
 
-app.listen(port, host, () => {
-    console.log(`Server running at ${host} on port ${port}`);
-})
+function printKeyValuePairs(err) {
+    console.log('KEY/VALUE PAIRS: ');
+    Object.keys(err).forEach(key => {
+        console.log(key + ': ' + err[key]);
+    });
+}
+
+mongoose.connect('mongodb+srv://dbUser:dbUserPassword@project3.jnmet5s.mongodb.net/aeroswap')
+    .then(() => {
+        app.listen(port, host, () => {
+            console.log(`Server running at ${host} on port ${port}`);
+        })
+    })
+    .catch(err => {
+        console.log(`Error connecting to DB: ${err}`);
+    });

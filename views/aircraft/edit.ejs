@@ -7,23 +7,23 @@
                 <label for="used-condition" class="form-label">Condition:</label>
                 <select name="condition" id="used-condition" class="form-control" required>
                     <option value="">Choose one...</option>
-                    <option value="new" <% if (aircraft.condition === 'new') { %>selected
+                    <option value="New" <% if (aircraft.condition === 'New') { %>selected
                             <% } %>
-                    >Brand new (&lt;100hr TTAF)
+                    >New
                     </option>
-                    <option value="like-new" <% if (aircraft.condition === 'like-new') { %>selected
+                    <option value="Like new" <% if (aircraft.condition === 'Like new') { %>selected
                             <% } %>
                     >Like new
                     </option>
-                    <option value="used-no-overhaul" <% if (aircraft.condition === 'used-no-overhaul') { %>selected
+                    <option value="Used, no engine overhauls" <% if (aircraft.condition === 'Used, no engine overhauls') { %>selected
                             <% } %>
                     >Used, no engine overhauls
                     </option>
-                    <option value="1-overhaul" <% if (aircraft.condition === '1-overhaul') { %>selected
+                    <option value="Used, one engine overhaul" <% if (aircraft.condition === 'Used, one engine overhaul') { %>selected
                             <% } %>
                     >Used, one engine overhaul
                     </option>
-                    <option value="2-overhaul" <% if (aircraft.condition === '2-overhaul') { %>selected
+                    <option value="Used, two or more overhauls" <% if (aircraft.condition === 'Used, two or more overhauls') { %>selected
                             <% } %>
                     >Used, two or more overhauls
                     </option>

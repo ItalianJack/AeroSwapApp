@@ -1,0 +1,78 @@
+[{
+  "_id": {
+    "$oid": "65f9f91272bc0a4a44fdedb3"
+  },
+  "title": "Cirrus Vision",
+  "seller": "Adam Jones",
+  "condition": "Used, no engine overhauls",
+  "price": 59999.99,
+  "details": "Very good, blue.",
+  "image": "cirrus_vision_sf50_wikipedia_fullsize.jpg",
+  "totalOffers": 0,
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "65f9f9a572bc0a4a44fdedb4"
+  },
+  "title": "Airtrike Ultralight",
+  "seller": "Norm Niner",
+  "condition": "Used, no engine overhauls",
+  "price": 8999.99,
+  "details": "Very good condition Airtrike Ultralight, never been overhauled. Blue. Lycoming OH-972. 2007 model.",
+  "image": "ultralight_discover-hubpages_fullsize.jpg",
+  "totalOffers": 0,
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "65f9f9e772bc0a4a44fdedb6"
+  },
+  "title": "Piper Light Sport",
+  "seller": "George Adams",
+  "condition": "New",
+  "price": 18999.99,
+  "details": "Very good condition Piper Light Sport, never been overhauled. Blue. Lycoming OH-972. 2007 model.",
+  "image": "piper_sport_aiteam-org_fullsize.jpg",
+  "totalOffers": 0,
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "65f9f9f872bc0a4a44fdedb8"
+  },
+  "title": "Cessna 150",
+  "seller": "Emily White",
+  "condition": "Like new",
+  "price": 25999.99,
+  "details": "Very good condition Cessna 150, never been overhauled. Blue. Lycoming OH-972. 2007 model.",
+  "image": "cessna-150_airliners-net_fullsize.jpg",
+  "totalOffers": 0,
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "65f9fa0572bc0a4a44fdedba"
+  },
+  "title": "Cessna 172 (Cert. IFR)",
+  "seller": "Chris Rodriguez",
+  "condition": "Used, one engine overhaul",
+  "price": 79999.99,
+  "details": "Very good condition Cessna 172, never been overhauled. Blue. Lycoming OH-972. 2007 model.",
+  "image": "cessna_172s_commons-wikimedia-org_fullsize.jpg",
+  "totalOffers": 0,
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "65f9fa6a72bc0a4a44fdedbc"
+  },
+  "title": "Cirrus SR-22",
+  "seller": "Blair Smith",
+  "condition": "Used, two or more overhauls",
+  "price": 109999.99,
+  "details": "Very good condition Cirrus SR-22, never been overhauled. Blue. Lycoming OH-972. 2007 model.",
+  "image": "cirrus_sr-22_wikipedia_fullsize.jpg",
+  "totalOffers": 0,
+  "active": true
+}]
