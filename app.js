@@ -9,7 +9,13 @@ const session = require('express-session');
 const MongoStore = require("connect-mongo");
 const flash = require('connect-flash');
 
-const MONGODB_URI = 'mongodb+srv://dbUser:dbUserPassword@project3.jnmet5s.mongodb.net/aeroswap';
+let MONGODB_URI;
+if (process.env.NODE_ENV === 'test') {
+    MONGODB_URI = 'mongodb+srv://dbUser:dbUserPassword@project3.jnmet5s.mongodb.net/aeroswap-test';
+} else {
+    MONGODB_URI = 'mongodb+srv://dbUser:dbUserPassword@project3.jnmet5s.mongodb.net/aeroswap';
+}
+
 
 // create app
 const app = express();
@@ -93,6 +99,9 @@ app.use((err, req, res, next) => {
     res.status(err.status);
     res.render('error', {err});
 })
+
+// Export the app for use with Chai and Mocha
+module.exports = app;
 
 // For debugging
 function printKeyValuePairs(err) {
