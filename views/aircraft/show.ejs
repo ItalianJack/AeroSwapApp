@@ -12,18 +12,19 @@
                 <li class="list-group-item">
                     <strong>$<%= aircraft.price.toLocaleString() %></strong> | <%= aircraft.totalOffers %> Offers
                 </li>
-                <li class="list-group-item"><strong>Condition:</strong> <%= aircraft.condition %> | <strong>Listed By:</strong> <%= aircraft.seller %>
+                <li class="list-group-item"><strong>Condition:</strong> <%= aircraft.condition %> | <strong>Listed By:</strong> <%= aircraft.seller.firstName + " " + aircraft.seller.lastName %>
                 </li>
                 <li class="list-group-item">
                     <%= aircraft.details %>
                 </li>
+                <% if (user && user._id == aircraft.seller._id) { %>
                 <li class="list-group-item">
                     <form>
                         <button type="submit" formmethod="GET" formaction="/aircraft/<%= aircraft.id %>/edit" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit Listing</button>
                         <button type="submit" formmethod="POST" formaction="/aircraft/<%= aircraft.id %>?_method=DELETE" class="btn btn-outline-primary"><i class="bi bi-trash3"></i> Delete Listing</button>
                     </form>
-
                 </li>
+                <% } %>
             </ul>
         </div>
     </div>

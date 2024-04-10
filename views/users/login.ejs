@@ -1,0 +1,20 @@
+<%- include('../partials/header.ejs') %>
+<main class="d-flex min-vh-100 flex-column">
+    <section class="mx-auto p-5">
+        <form action="/users/login" method="POST" class="card p-2 bg-body-secondary" enctype="application/x-www-form-urlencoded">
+            <h4>Login</h4>
+            <fieldset class="mb-2">
+                <label for="email" class="form-label">Email:</label>
+                <input name="email" type="email" id="email" placeholder="jdoe@email.com" class="form-control"
+                       maxlength="30" required>
+            </fieldset>
+            <fieldset class="mb-2">
+                <label for="password" class="form-label">Password:</label>
+                <input name="password" type="password" id="password" placeholder="password" class="form-control"
+                       maxlength="30" required>
+            </fieldset>
+            <input type="submit" value="Login" class="form-control">
+        </form>
+    </section>
+</main>
+<%- include('../partials/footer.ejs') %>

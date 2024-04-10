@@ -1,0 +1,26 @@
+<%- include('../partials/header.ejs') %>
+<main class="container p-5">
+    <h2 class="text-body-emphasis">Your aircraft</h2>
+    <section class="listings d-flex flex-row flex-wrap justify-content-evenly">
+        <% if (aircraft.length > 0) { %>
+            <% aircraft.forEach(aircraft => { %>
+                <a href="/aircraft/<%= aircraft.id %>">
+                    <div class="card">
+                        <img class="card-img-top"
+                             src="/images/<%= aircraft.image %>">
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><h5
+                                            class="card-title"><%= aircraft.title %></h5><%= aircraft.condition %></li>
+                                <li class="list-group-item">$<%= aircraft.price.toLocaleString() %> | <%= aircraft.totalOffers %> Offers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </a>
+            <% }); %>
+        <% } else { %>
+            <p>No aircraft listings to display.</p>
+        <% } %>
+    </section>
+</main>
+<%- include('../partials/footer.ejs') %>

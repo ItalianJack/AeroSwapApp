@@ -18,6 +18,7 @@ exports.new = (req, res) => {
 // Create - POST /aircraft
 exports.create = (req, res, next) => {
     let newAircraft = new Aircraft(req.body);
+    newAircraft.seller = req.session.user._id;
     if (req.file) {
         newAircraft.image = req.file.filename;
     }
@@ -33,7 +34,7 @@ exports.create = (req, res, next) => {
 // Show - GET /aircraft/:id
 exports.show = (req, res, next) => {
     const id = req.params.id
-    Aircraft.findById(id)
+    Aircraft.findById(id).populate('seller', 'firstName lastName')
         .then((aircraft) => {
             if (!aircraft) {
                 let err = new Error('No listing found with id ' + id);
