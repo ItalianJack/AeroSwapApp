@@ -46,7 +46,7 @@ exports.login = (req, res, next) => {
                         if (correctPassword) {
                             req.session.user = user;
                             req.flash('success', 'You are now logged in. Welcome back!');
-                            res.redirect('/');
+                            res.redirect('/users/profile');
                         } else {
                             console.log('Wrong password');
                             req.flash('error', 'Wrong password.');
