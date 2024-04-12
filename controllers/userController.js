@@ -58,7 +58,7 @@ exports.login = (req, res, next) => {
 }
 
 exports.profile = (req, res, next) => {
-    Aircraft.find({seller: req.session.user.id})
+    Aircraft.find({seller: req.session.user._id})
         .then(aircraft => res.render('users/profile', {aircraft}))
         .catch(err => next(err));
 }
