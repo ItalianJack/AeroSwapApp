@@ -85,9 +85,13 @@ app.use((err, req, res, next) => {
     console.log('\n\n\n===== ERROR HANDLER =====');
     console.log(err);
 
-    if (err.message.toLowerCase().includes('validation')) {
+    if (err.name === 'ValidationError') {
+        err.message = 'Validation Error';
         err.status = 400;
-        // err.message is fine as is
+    }
+    if (err.code === 11000) {
+        req.flash('error', 'Email already in use!');
+        res.redirect('back');
     } else if (err.reason && err.reason.toString().includes('BSONError')) {
         err.status = 400;
         err.message = 'Bad Request: Invalid ID';
