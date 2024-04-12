@@ -84,10 +84,11 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     console.log('\n\n\n===== ERROR HANDLER =====');
     console.log(err);
+    // printKeyValuePairs(err);
 
     if (err.name === 'ValidationError') {
-        err.message = 'Validation Error';
-        err.status = 400;
+        req.flash('error', err.message);
+        res.redirect('back');
     }
     if (err.code === 11000) {
         req.flash('error', 'Email already in use!');
@@ -111,6 +112,7 @@ module.exports = app;
 function printKeyValuePairs(err) {
     console.log('KEY/VALUE PAIRS: ');
     Object.keys(err).forEach(key => {
-        console.log(key + ': ' + err[key]);
+        console.log('  ' + key + ': ' + err[key]);
+        console.log(Object.keys(err[key]))
     });
 }
