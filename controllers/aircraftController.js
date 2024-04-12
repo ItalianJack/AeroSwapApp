@@ -77,6 +77,7 @@ exports.update = (req, res, next) => {
     Aircraft.updateOne({_id: id}, updatedAircraft, {runValidators: true})
         .then((response) => {
             console.log('PUT RESPONSE: ' + response.modifiedCount);
+            req.flash('success', 'Listing updated successfully.');
             res.redirect(`/aircraft/${id}`);
         })
         .catch(err => {
@@ -94,6 +95,7 @@ exports.destroy = (req, res, next) => {
                 err.status = 404;
                 next(err);
             } else {
+                req.flash('success', 'Listing deleted successfully.');
                 res.redirect('/aircraft');
             }
         })
