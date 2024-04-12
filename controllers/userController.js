@@ -13,14 +13,6 @@ exports.create = (req, res, next) => {
             res.redirect('/users/login');
         })
         .catch((err) => {
-            if (err.name === 'ValidationError') {
-                err.message = 'Validation Error';
-                err.status = 400;
-            }
-            if (err.code === 11000) {
-                err.message = 'Email already exists';
-                err.status = 400;
-            }
             next(err);
         });
 }
