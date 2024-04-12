@@ -6,13 +6,19 @@
             <% aircraft.forEach(aircraft => { %>
                 <a href="/aircraft/<%= aircraft.id %>">
                     <div class="card">
-                        <img class="card-img-top"
-                             src="/images/<%= aircraft.image %>">
+<!--                        <img class="card-img-top"-->
+<!--                             src="/images/<%= aircraft.image %>">-->
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"><h5
-                                            class="card-title"><%= aircraft.title %></h5><%= aircraft.condition %></li>
+                                            class="card-title"><%= aircraft.title %></h5><%= aircraft.active ? 'Active' : 'Inactive' %></li>
                                 <li class="list-group-item">$<%= aircraft.price.toLocaleString() %> | <%= aircraft.totalOffers %> Offers</li>
+                                <li class="list-group-item">
+                                    <form>
+                                        <button type="submit" formmethod="GET" formaction="/aircraft/<%= aircraft.id %>/edit" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
+                                        <button type="submit" formmethod="POST" formaction="/aircraft/<%= aircraft.id %>?_method=DELETE" class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                    </form>
+                                </li>
                             </ul>
                         </div>
                     </div>

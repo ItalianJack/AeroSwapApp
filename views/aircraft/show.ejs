@@ -21,7 +21,7 @@
                 <li class="list-group-item">
                     <form>
                         <button type="submit" formmethod="GET" formaction="/aircraft/<%= aircraft.id %>/edit" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit Listing</button>
-                        <button type="submit" formmethod="POST" formaction="/aircraft/<%= aircraft.id %>?_method=DELETE" class="btn btn-outline-primary"><i class="bi bi-trash3"></i> Delete Listing</button>
+                        <button type="submit" formmethod="POST" formaction="/aircraft/<%= aircraft.id %>?_method=DELETE" class="btn btn-outline-danger"><i class="bi bi-trash3"></i> Delete Listing</button>
                     </form>
                 </li>
                 <% } %>
