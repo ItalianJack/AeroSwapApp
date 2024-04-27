@@ -3,7 +3,7 @@ const Aircraft = require('../models/aircraft');
 // Index - GET /aircraft
 exports.index = (req, res) => {
     const search = req.query.search;
-    Aircraft.find({"$or": [{title: new RegExp(search, 'i')}, {details: new RegExp(search, 'i')}]})
+    Aircraft.find({"$and": [{active: true},{"$or": [{title: new RegExp(search, 'i')}, {details: new RegExp(search, 'i')}]}]})
         .sort({price: 1})
         .then((aircraft) => {
             res.render('aircraft/index', {aircraft});
