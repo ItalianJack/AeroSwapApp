@@ -25,7 +25,7 @@ exports.create = (req, res, next) => {
     newAircraft.save()
         .then((savedAircraft) => {
             req.flash('success', 'Listing created successfully.');
-            res.redirect(`/aircraft/${savedAircraft.id}`);
+            res.redirect(`/aircraft`);
         })
         .catch(err => {
             next(err);
