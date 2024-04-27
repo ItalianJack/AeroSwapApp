@@ -66,7 +66,7 @@ mongoose.connect(MONGODB_URI)
 
 // Default route
 app.get('/', (req, res) => {
-    res.render('index');
+    return res.render('index');
 });
 
 // /aircraft and /users routes
@@ -88,11 +88,11 @@ app.use((err, req, res, next) => {
 
     if (err.name === 'ValidationError') {
         req.flash('error', err.message);
-        res.redirect('back');
+        return res.redirect('back');
     }
     if (err.code === 11000) {
         req.flash('error', 'Email already in use!');
-        res.redirect('back');
+        return res.redirect('back');
     } else if (err.reason && err.reason.toString().includes('BSONError')) {
         err.status = 400;
         err.message = 'Bad Request: Invalid ID';
@@ -102,7 +102,7 @@ app.use((err, req, res, next) => {
     }
 
     res.status(err.status);
-    res.render('error', {err});
+    return res.render('error', {err});
 })
 
 // Export the app for use with Chai and Mocha
