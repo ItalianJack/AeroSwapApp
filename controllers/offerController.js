@@ -43,7 +43,45 @@ exports.create = (req, res, next) => {
 }
 
 // Accept - PUT? /aircraft/:id/offers/:offerId/accept
+// Accept an offer and reject all other offers
 exports.accept = (req, res, next) => {
     const acId = req.params.id;
     const offerId = req.params.offerId;
+
+    // Set the aircraft listing to inactive
+    Aircraft.findById(acId)
+        .then(aircraft => {
+            aircraft.active = false;
+            aircraft.save();
+        })
+        // Find the offer by ID and accept it
+        .then(() => {
+            Offer.findById(offerId)
+                .then(acceptedOffer => {
+                    acceptedOffer.accepted = "Accepted";
+                    acceptedOffer.save({runValidators: true})
+                })
+        })
+        // Reject all other offers for specified aircraft
+        .then(() => {
+            console.log(`Offer ${offerId} accepted successfully.`)
+            Offer.find({aircraft: acId, _id: {$ne: offerId}})
+                .then(otherOffers => {
+                    otherOffers.forEach(offer => {
+                        offer.accepted = "Rejected";
+                        offer.save()
+                            .then(() => {
+                                console.log(`Offer ${offer._id} rejected successfully.`)
+                            })
+                    });
+                })
+        })
+        // Notify the user and redirect to the offers page
+        .then(() => {
+            req.flash('success', 'Offer accepted successfully.');
+            res.redirect(`/aircraft/${acId}/offers`);
+        })
+        .catch(err => {
+            next(err);
+        });
 }

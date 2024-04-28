@@ -4,13 +4,26 @@
         <div class="row gx-0 gy-0">
             <ul class="list-group list-group-flush p-3">
                 <li class="list-group-item">
-                    <h4 class="card-title">Offers for <%= aircraft.title %></h4>
+                    <h4 class="card-title">Offers for <%= aircraft.title %></h4> Listing active: <%= aircraft.active%>
                 </li>
                 <% if (offers && offers.length > 0) { %>
                     <% offers.forEach(offer => { %>
                         <li class="list-group-item">
-                            <%= offer.buyer.firstName + " " + offer.buyer.lastName %> |
-                            $<%= offer.price.toLocaleString() %>
+                            <div class="row align-items-start">
+                                <div class="col"><%= offer.buyer.firstName + " " + offer.buyer.lastName %></div>
+                                <div class="col">$<%= offer.price.toLocaleString() %></div>
+                                <div class="col"><%= offer.accepted %></div>
+                                <div class="col">
+                                    <% if (aircraft.active) { %>
+                                    <form>
+                                        <button type="submit" formmethod="POST"
+                                                formaction="/aircraft/<%= aircraft.id %>/offers/<%= offer._id %>/accept?_method=PUT"
+                                                class="btn btn-primary float-end btn-sm text-nowrap">Accept Offer
+                                        </button>
+                                    </form>
+                                    <% } %>
+                                </div>
+                            </div>
                         </li>
                     <% }); %>
                 <% } else { %>
