@@ -1,0 +1,25 @@
+<%- include('../partials/header.ejs') %>
+<main class="p-5">
+    <div class="single-listing card mx-auto">
+        <div class="row gx-0 gy-0">
+            <ul class="list-group list-group-flush p-3">
+                <li class="list-group-item">
+                    <h4 class="card-title">Offers for <%= aircraft.title %></h4>
+                </li>
+                <% if (offers && offers.length > 0) { %>
+                    <% offers.forEach(offer => { %>
+                        <li class="list-group-item">
+                            <%= offer.buyer.firstName + " " + offer.buyer.lastName %> |
+                            $<%= offer.price.toLocaleString() %>
+                        </li>
+                    <% }); %>
+                <% } else { %>
+                    <li class="list-group-item">
+                        No offers for this aircraft.
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</main>
+<%- include('../partials/footer.ejs') %>

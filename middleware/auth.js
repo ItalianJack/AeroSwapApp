@@ -36,6 +36,5 @@ exports.isSeller = (req, res, next) => {
                 err.status = 404;
                 next(err);
             }
-
         })
 }

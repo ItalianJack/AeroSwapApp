@@ -16,6 +16,7 @@ const aircraftSchema = new Schema({
     details: {type: String, required: [true, 'Details are required']},
     image: {type: String, required: [true, 'Image is required']},
     totalOffers: {type: Number, default: 0},
+    highestOffer: {type: Number, default: 0},
     active: {type: Boolean, default: true}
 });
 

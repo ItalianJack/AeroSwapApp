@@ -10,16 +10,23 @@
                     <h4 class="card-title"><%= aircraft.title %></h4>
                 </li>
                 <li class="list-group-item">
-                    <strong>$<%= aircraft.price.toLocaleString() %></strong> | <%= aircraft.totalOffers %> Offers
+                    <strong>$<%= aircraft.price.toLocaleString() %></strong> | <%= aircraft.totalOffers %> Offers <% if (aircraft.totalOffers > 0) { %>| Highest offer: $<%= aircraft.highestOffer.toLocaleString() %><% } %>
                 </li>
                 <li class="list-group-item"><strong>Condition:</strong> <%= aircraft.condition %> | <strong>Listed By:</strong> <%= aircraft.seller.firstName + " " + aircraft.seller.lastName %>
                 </li>
                 <li class="list-group-item">
                     <%= aircraft.details %>
                 </li>
+                <li class="list-group-item">
+                    <form action="/aircraft/<%= aircraft.id %>/offers" method="post">
+                        <input type="number" min="0.01" step="0.01" name="price" id="price" placeholder="$999.99" class="form-control">
+                        <input type="submit" value="Make Offer" class="btn btn-primary">
+                    </form>
+                </li>
                 <% if (user && user._id == aircraft.seller._id) { %>
                 <li class="list-group-item">
                     <form>
+                        <button type="submit" formmethod="GET" formaction="/aircraft/<%= aircraft.id %>/offers" class="btn btn-secondary">View Offers</button>
                         <button type="submit" formmethod="GET" formaction="/aircraft/<%= aircraft.id %>/edit" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit Listing</button>
                         <button type="submit" formmethod="POST" formaction="/aircraft/<%= aircraft.id %>?_method=DELETE" class="btn btn-outline-danger"><i class="bi bi-trash3"></i> Delete Listing</button>
                     </form>
