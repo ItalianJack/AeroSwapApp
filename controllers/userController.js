@@ -7,7 +7,6 @@ exports.new = (req, res) => {
 }
 
 exports.create = (req, res, next) => {
-    console.log(req.body);
     let user = new User(req.body);
     user.save()
         .then(() => {
