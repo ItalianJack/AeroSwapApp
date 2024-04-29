@@ -23,14 +23,12 @@ exports.showLogin = (req, res) => {
 }
 
 exports.login = (req, res, next) => {
-    console.log(req.body);
     const email = req.body.email;
     const password = req.body.password;
 
     User.findOne({email: email})
         .then(user => {
             if (!user) {
-                console.log('Wrong email address');
                 req.flash('error', 'Wrong email address.');
                 res.redirect('/users/login');
             } else {
@@ -41,7 +39,6 @@ exports.login = (req, res, next) => {
                             req.flash('success', 'You are now logged in. Welcome back!');
                             res.redirect('/users/profile');
                         } else {
-                            console.log('Wrong password');
                             req.flash('error', 'Wrong password.');
                             res.redirect('/users/login');
                         }
