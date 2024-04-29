@@ -6,7 +6,8 @@ exports.isGuest = (req, res, next) => {
         next();
     } else {
         req.flash('error', 'You are already logged in.');
-        res.redirect('/users/profile');
+        console.log('Redirecting from isGuest');
+        return res.redirect('/users/profile');
     }
 }
 
@@ -15,7 +16,8 @@ exports.isLoggedIn = (req, res, next) => {
         next();
     } else {
         req.flash('error', 'You must be logged in to view that page.');
-        res.redirect('/users/login');
+        console.log('Redirecting from isLoggedIn')
+        return res.redirect('/users/login');
     }
 }
 
@@ -55,6 +57,28 @@ exports.isNotSeller = (req, res, next) => {
                 const err = new Error('Listing not found');
                 err.status = 404;
                 next(err);
+            }
+        })
+}
+
+exports.isPubliclyVisible = (req, res, next) => {
+    const listingId = req.params.id;
+    Aircraft.findById(listingId)
+        .then(listing => {
+            if (listing) {
+                if (listing.active) {
+                    next();
+                } else if (req.session.user && listing.seller.equals(req.session.user._id)) {
+                    next();
+                } else if (req.session.user) {
+                    let err = new Error('Unauthorized');
+                    err.status = 401;
+                    next(err);
+                } else {
+                    req.flash('error', 'You must be logged in to view that page.');
+                    console.log('Redirecting from isPubliclyVisible')
+                    return res.redirect('/users/login');
+                }
             }
         })
 }
