@@ -8,7 +8,7 @@ exports.list = (req, res, next) => {
         .then(offers => {
             Aircraft.findById(acId)
                 .then(aircraft => {
-                    res.render('aircraft/offers', {offers, aircraft});
+                    res.render('offers/offers', {offers, aircraft});
                 });
         })
         .catch(err => {
@@ -24,9 +24,6 @@ exports.create = (req, res, next) => {
     offer.buyer = req.session.user._id;
     offer.save()
         .then((savedOffer) => {
-            // Tell the user that the offer was created
-            req.flash('success', 'Offer created successfully.');
-            res.redirect(`/aircraft/${acId}`);
             // Update the aircraft's offer count and highest offer if necessary
             Aircraft.findById(acId)
                 .then(aircraft => {
@@ -36,6 +33,11 @@ exports.create = (req, res, next) => {
                     }
                     aircraft.save();
                 })
+        })
+        .then(() => {
+            // Tell the user that the offer was created
+            req.flash('success', 'Offer created successfully.');
+            res.redirect(`/aircraft/${acId}`);
         })
         .catch(err => {
             next(err);
