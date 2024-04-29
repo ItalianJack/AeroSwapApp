@@ -10,11 +10,11 @@ const MongoStore = require("connect-mongo");
 const flash = require('connect-flash');
 
 let MONGODB_URI;
-if (process.env.NODE_ENV === 'test') {
-    MONGODB_URI = 'mongodb+srv://dbUser:dbUserPassword@project3.jnmet5s.mongodb.net/aeroswap-test';
-} else {
+// if (process.env.NODE_ENV === 'test') {
+//     MONGODB_URI = 'mongodb+srv://dbUser:dbUserPassword@project3.jnmet5s.mongodb.net/aeroswap-test';
+// } else {
     MONGODB_URI = 'mongodb+srv://dbUser:dbUserPassword@project3.jnmet5s.mongodb.net/aeroswap';
-}
+// }
 
 
 // create app
