@@ -12,15 +12,16 @@
                             <div class="row align-items-start">
                                 <div class="col"><%= offer.buyer.firstName + " " + offer.buyer.lastName %></div>
                                 <div class="col">$<%= offer.price.toLocaleString() %></div>
-                                <div class="col"><%= offer.accepted %></div>
                                 <div class="col">
                                     <% if (aircraft.active) { %>
-                                    <form>
-                                        <button type="submit" formmethod="POST"
-                                                formaction="/aircraft/<%= aircraft.id %>/offers/<%= offer._id %>/accept?_method=PUT"
-                                                class="btn btn-primary float-end btn-sm text-nowrap">Accept Offer
-                                        </button>
-                                    </form>
+                                        <form>
+                                            <button type="submit" formmethod="POST"
+                                                    formaction="/aircraft/<%= aircraft.id %>/offers/<%= offer._id %>/accept?_method=PUT"
+                                                    class="btn btn-primary float-end btn-sm text-nowrap">Accept Offer
+                                            </button>
+                                        </form>
+                                    <% } else { %>
+                                        <%= offer.accepted %>
                                     <% } %>
                                 </div>
                             </div>
