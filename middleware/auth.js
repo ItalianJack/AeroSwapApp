@@ -38,3 +38,23 @@ exports.isSeller = (req, res, next) => {
             }
         })
 }
+
+exports.isNotSeller = (req, res, next) => {
+    const listingId = req.params.id;
+    Aircraft.findById(listingId)
+        .then(listing => {
+            if (listing) {
+                if (!listing.seller.equals(req.session.user._id)) {
+                    next();
+                } else {
+                    let err = new Error('Unauthorized');
+                    err.status = 401;
+                    next(err);
+                }
+            } else {
+                const err = new Error('Listing not found');
+                err.status = 404;
+                next(err);
+            }
+        })
+}
