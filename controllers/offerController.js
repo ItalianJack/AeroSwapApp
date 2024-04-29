@@ -4,16 +4,16 @@ const Offer = require('../models/offer');
 // List - GET /aircraft/:id/offers
 exports.list = (req, res, next) => {
     const acId = req.params.id;
-    Offer.find({aircraft: acId}).populate('buyer')
-        .then(offers => {
-            Aircraft.findById(acId)
-                .then(aircraft => {
-                    res.render('offers/offers', {offers, aircraft});
-                });
+    Promise.all([
+        Aircraft.findById(acId),
+        Offer.find({aircraft: acId}).populate('buyer')
+    ])
+        .then(([aircraft, offers]) => {
+            res.render('offers/offers', {aircraft, offers});
         })
         .catch(err => {
             next(err);
-        });
+        })
 }
 
 // Create - POST /aircraft/:id/offers
