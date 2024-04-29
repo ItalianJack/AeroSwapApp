@@ -1,4 +1,5 @@
 const Aircraft = require('../models/aircraft');
+const Offer = require('../models/offer');
 
 // Index - GET /aircraft
 exports.index = (req, res) => {
@@ -96,8 +97,11 @@ exports.destroy = (req, res, next) => {
                 err.status = 404;
                 next(err);
             } else {
-                req.flash('success', 'Listing deleted successfully.');
-                res.redirect('/aircraft');
+                Offer.deleteMany({aircraft: id})
+                    .then(() => {
+                        req.flash('success', 'Listing deleted successfully.');
+                         res.redirect('/aircraft');
+                    })
             }
         })
         .catch(err => {
