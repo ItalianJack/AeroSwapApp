@@ -7,15 +7,16 @@ const controller = require('../controllers/offerController');
 const auth = require('../middleware/auth');
 const validator = require('../middleware/validator');
 
+// mergeParams: true is required to access req.params.id in this router
 const router = express.Router({mergeParams: true});
 
 // List - GET /aircraft/:id/offers
-router.get('/', controller.list);
+router.get('/', auth.isLoggedIn, auth.isSeller, controller.list);
 
 // Create - POST /aircraft/:id/offers
-router.post('/', controller.create);
+router.post('/', auth.isLoggedIn, auth.isNotSeller, controller.create);
 
 // Accept - PUT? /aircraft/:id/offers/:offerId/accept
-router.put('/:offerId/accept', controller.accept);
+router.put('/:offerId/accept', auth.isLoggedIn, auth.isSeller, controller.accept);
 
 module.exports = router;
