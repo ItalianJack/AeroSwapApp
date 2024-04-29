@@ -1,32 +1,71 @@
 <%- include('../partials/header.ejs') %>
 <main class="container p-5">
-    <h2 class="text-body-emphasis">Your aircraft</h2>
-    <section class="listings d-flex flex-row flex-wrap justify-content-evenly">
-        <% if (aircraft.length > 0) { %>
-            <% aircraft.forEach(aircraft => { %>
-                <a href="/aircraft/<%= aircraft.id %>">
-                    <div class="card">
-<!--                        <img class="card-img-top"-->
-<!--                             src="/images/<%= aircraft.image %>">-->
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><h5
-                                            class="card-title"><%= aircraft.title %></h5><%= aircraft.active ? 'Active' : 'Inactive' %></li>
-                                <li class="list-group-item">$<%= aircraft.price.toLocaleString() %> | <%= aircraft.totalOffers %> Offers</li>
-                                <li class="list-group-item">
+    <div class="card mx-auto">
+        <div class="row gx-0 gy-0">
+            <ul class="list-group list-group-flush p-3">
+                <li class="list-group-item">
+                    <h4 class="card-title">Your listings</h4>
+                </li>
+                <% if (aircraft && aircraft.length > 0) { %>
+                    <% aircraft.forEach(aircraft => { %>
+                        <li class="list-group-item">
+                            <div class="row align-items-start">
+                                <div class="col"><a href="/aircraft/<%= aircraft.id %>"><%= aircraft.title %></a></div>
+                                <div class="col">$<%= aircraft.price.toLocaleString() %></div>
+                                <div class="col">Active: <%= aircraft.active %></div>
+                                <div class="col text-nowrap">
                                     <form>
-                                        <button type="submit" formmethod="GET" formaction="/aircraft/<%= aircraft.id %>/edit" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
-                                        <button type="submit" formmethod="POST" formaction="/aircraft/<%= aircraft.id %>?_method=DELETE" class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                        <button type="submit" formmethod="POST"
+                                                formaction="/aircraft/<%= aircraft.id %>?_method=DELETE"
+                                                class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                        <button type="submit" formmethod="GET"
+                                                formaction="/aircraft/<%= aircraft.id %>/edit"
+                                                class="btn btn-sm btn-secondary">
+                                            <i class="bi bi-pencil-square"></i></button>
+                                        <button type="submit" formmethod="GET"
+                                                formaction="/aircraft/<%= aircraft.id %>/offers"
+                                                class="btn btn-primary" <% if (aircraft.totalOffers === 0) { %>disabled
+                                                <% } %>
+                                        >View Offers
+                                        </button>
                                     </form>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </a>
-            <% }); %>
-        <% } else { %>
-            <p>No aircraft listings to display.</p>
-        <% } %>
-    </section>
+                                </div>
+                            </div>
+                        </li>
+                    <% }); %>
+                <% } else { %>
+                    <li class="list-group-item">
+                        You have no aircraft listings.
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+    <div class="card mx-auto mt-5">
+        <div class="row gx-0 gy-0">
+            <ul class="list-group list-group-flush p-3">
+                <li class="list-group-item">
+                    <h4 class="card-title">Your offers</h4>
+                </li>
+                <% if (offers && offers.length > 0) { %>
+                    <% offers.forEach(offer => { %>
+                        <li class="list-group-item">
+                            <div class="row align-items-start">
+                                <div class="col"><a
+                                            href="/aircraft/<%= offer.aircraft.id %>"><%= offer.aircraft.title %></a>
+                                </div>
+                                <div class="col">$<%= offer.price.toLocaleString() %></div>
+                                <div class="col"><%= offer.accepted %></div>
+                            </div>
+                        </li>
+                    <% }); %>
+                <% } else { %>
+                    <li class="list-group-item">
+                        You have made no offers.
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
 </main>
 <%- include('../partials/footer.ejs') %>

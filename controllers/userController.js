@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Aircraft = require('../models/aircraft');
+const Offer = require('../models/offer');
 
 exports.new = (req, res) => {
     res.render('users/new');
@@ -48,9 +49,13 @@ exports.login = (req, res, next) => {
 }
 
 exports.profile = (req, res, next) => {
-    Aircraft.find({seller: req.session.user._id})
-        .then(aircraft => res.render('users/profile', {aircraft}))
-        .catch(err => next(err));
+    Promise.all([
+        Aircraft.find({seller: req.session.user._id}),
+        Offer.find({buyer: req.session.user._id}).populate('aircraft')
+    ])
+        .then(([aircraft, offers]) => {
+            res.render('users/profile', {aircraft, offers});
+        })
 }
 
 exports.logout = (req, res, next) => {
