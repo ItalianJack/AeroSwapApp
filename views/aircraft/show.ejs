@@ -11,7 +11,7 @@
                 </li>
                 <li class="list-group-item">
                     <strong>$<%= aircraft.price.toLocaleString() %></strong> | <%= aircraft.totalOffers %> Offers
-                    <% if (aircraft.totalOffers > 0) { %>| Highest offer: $<%= aircraft.highestOffer.toLocaleString() %>
+                    <% if (aircraft.active && aircraft.totalOffers > 0) { %>| Highest offer: $<%= aircraft.highestOffer.toLocaleString() %>
                     <% } %>
                 </li>
                 <li class="list-group-item"><strong>Condition:</strong> <%= aircraft.condition %> | <strong>Listed
