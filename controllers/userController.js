@@ -30,17 +30,19 @@ exports.login = (req, res, next) => {
         .then(user => {
             if (!user) {
                 req.flash('error', 'Wrong email address.');
-                res.redirect('/users/login');
+                console.log('Login redirect from email block!')
+                return res.redirect('/users/login');
             } else {
                 user.comparePassword(password)
                     .then(correctPassword => {
                         if (correctPassword) {
                             req.session.user = user;
                             req.flash('success', 'You are now logged in. Welcome back!');
-                            res.redirect('/users/profile');
+                            return res.redirect('/users/profile');
                         } else {
                             req.flash('error', 'Wrong password.');
-                            res.redirect('/users/login');
+                            console.log('Login redirect from password block!')
+                            return res.redirect('/users/login');
                         }
                     })
             }
