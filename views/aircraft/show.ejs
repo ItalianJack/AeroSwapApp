@@ -8,10 +8,14 @@
             <ul class="list-group list-group-flush col-lg-5 p-3">
                 <li class="list-group-item">
                     <h4 class="card-title"><%= aircraft.title %></h4>
+                    <% if (!aircraft.active) { %>
+                        <div class="text-danger">This aircraft is no longer available.</div>
+                    <% } %>
                 </li>
                 <li class="list-group-item">
                     <strong>$<%= aircraft.price.toLocaleString() %></strong> | <%= aircraft.totalOffers %> Offers
-                    <% if (aircraft.active && aircraft.totalOffers > 0) { %>| Highest offer: $<%= aircraft.highestOffer.toLocaleString() %>
+                    <% if (aircraft.active && aircraft.totalOffers > 0) { %>| Highest offer:
+                    $<%= aircraft.highestOffer.toLocaleString() %>
                     <% } %>
                 </li>
                 <li class="list-group-item"><strong>Condition:</strong> <%= aircraft.condition %> | <strong>Listed
