@@ -31,13 +31,13 @@ exports.create = (req, res, next) => {
                     if (savedOffer.price > aircraft.highestOffer) {
                         aircraft.highestOffer = savedOffer.price;
                     }
-                    aircraft.save();
+                    aircraft.save()
+                        .then(() => {
+                            // Tell the user that the offer was created
+                            req.flash('success', 'Offer created successfully.');
+                            res.redirect(`/aircraft/${acId}`);
+                        })
                 })
-        })
-        .then(() => {
-            // Tell the user that the offer was created
-            req.flash('success', 'Offer created successfully.');
-            res.redirect(`/aircraft/${acId}`);
         })
         .catch(err => {
             next(err);
